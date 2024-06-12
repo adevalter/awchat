@@ -1,5 +1,4 @@
 import 'package:awchat/page/auth_page/auth_page.dart';
-import 'package:awchat/page/loading_page/loading_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
