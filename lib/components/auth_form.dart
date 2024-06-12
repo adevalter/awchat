@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:awchat/components/user_image_picker.dart';
-import 'package:awchat/models/auth_form_data.dart';
+import 'package:awchat/core/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
