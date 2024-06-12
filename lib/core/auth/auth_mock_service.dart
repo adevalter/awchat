@@ -6,7 +6,15 @@ import 'package:awchat/core/auth/auth_service.dart';
 import 'package:awchat/core/models/chat_user.dart';
 
 class AuthMockService implements AuthService {
-  static Map<String, ChatUser> _users = {};
+  static final _defaulUser = ChatUser(
+    id: '1',
+    name: 'Teste',
+    email: 'teste@teste.com',
+    imageUrl: '/assets/image/avatar/png',
+  );
+  static Map<String, ChatUser> _users = {
+    _defaulUser.email: _defaulUser,
+  };
   static ChatUser? _currentUser;
   static MultiStreamController<ChatUser?>? _controller;
   static final _userStream = Stream<ChatUser?>.multi((controller) {
@@ -40,7 +48,7 @@ class AuthMockService implements AuthService {
       id: Random().nextDouble().toString(),
       name: name,
       email: email,
-      imageUrl: image.path,
+      imageUrl: image?.path ?? '/assets/images/avatar.png',
     );
     _users.putIfAbsent(email, () => newUser);
     _updateUser(newUser);

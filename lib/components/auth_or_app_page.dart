@@ -1,4 +1,4 @@
-import 'package:awchat/core/auth/auth_mock_service.dart';
+import 'package:awchat/core/auth/auth_service.dart';
 import 'package:awchat/core/models/chat_user.dart';
 import 'package:awchat/page/auth_page/auth_page.dart';
 import 'package:awchat/page/chat_page/chat_page.dart';
@@ -12,7 +12,7 @@ class AuthOrAppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<ChatUser?>(
-        stream: AuthMockService().UserChanges,
+        stream: AuthService().UserChanges,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return LoadingPage();
