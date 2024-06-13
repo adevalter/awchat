@@ -7,12 +7,12 @@ import 'package:awchat/core/models/chat_user.dart';
 
 class AuthMockService implements AuthService {
   static final _defaulUser = ChatUser(
-    id: '1',
-    name: 'Teste',
+    id: '122',
+    name: 'DotCom',
     email: 'teste@teste.com',
     imageUrl: '/assets/image/avatar/png',
   );
-  static Map<String, ChatUser> _users = {
+  static final Map<String, ChatUser> _users = {
     _defaulUser.email: _defaulUser,
   };
   static ChatUser? _currentUser;
@@ -22,7 +22,7 @@ class AuthMockService implements AuthService {
     _updateUser(_defaulUser);
   });
   @override
-  Stream<ChatUser?> get UserChanges {
+  Stream<ChatUser?> get userChanges {
     return _userStream;
   }
 

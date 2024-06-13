@@ -1,3 +1,5 @@
+import 'package:awchat/components/message_bubble.dart';
+import 'package:awchat/core/auth/auth_service.dart';
 import 'package:awchat/core/services/chat_service.dart';
 import 'package:flutter/material.dart';
 
@@ -6,15 +8,16 @@ class Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = AuthService().currentUser;
     return StreamBuilder(
       stream: ChatService().messagesStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(
+          return const Center(
             child: Text("Sem Dados. Vamos Conversar"),
           );
         } else {
@@ -22,7 +25,10 @@ class Messages extends StatelessWidget {
           return ListView.builder(
               reverse: true,
               itemCount: msgs.length,
-              itemBuilder: (ctx, i) => Text(msgs[i].text));
+              itemBuilder: (ctx, i) => MessageBubble(
+                  key: ValueKey(msgs[i].id),
+                  message: msgs[i],
+                  belongsToCurrentUser: currentUser?.id == msgs[i].userId));
         }
       },
     );
