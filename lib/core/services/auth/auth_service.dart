@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:awchat/core/auth/auth_mock_service.dart';
+import 'package:awchat/core/services/auth/auth_mock_service.dart';
 import 'package:awchat/core/models/chat_user.dart';
 
 abstract class AuthService {

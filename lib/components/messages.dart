@@ -1,6 +1,6 @@
 import 'package:awchat/components/message_bubble.dart';
-import 'package:awchat/core/auth/auth_service.dart';
-import 'package:awchat/core/services/chat_service.dart';
+import 'package:awchat/core/services/auth/auth_service.dart';
+import 'package:awchat/core/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 class Messages extends StatelessWidget {

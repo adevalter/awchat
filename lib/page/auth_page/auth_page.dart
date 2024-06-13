@@ -1,5 +1,5 @@
 import 'package:awchat/components/auth_form.dart';
-import 'package:awchat/core/auth/auth_service.dart';
+import 'package:awchat/core/services/auth/auth_service.dart';
 import 'package:awchat/core/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:awchat/core/models/chat_message.dart';
 import 'package:awchat/core/models/chat_user.dart';
-import 'package:awchat/core/services/chat_service.dart';
+import 'package:awchat/core/services/chat/chat_service.dart';
 
 class ChatMockService implements ChatService {
   static final List<ChatMessage> _msgs = [];
