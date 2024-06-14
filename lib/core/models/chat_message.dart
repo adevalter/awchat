@@ -5,7 +5,7 @@ class ChatMessage {
 
   final String userId;
   final String userName;
-  final String userImageURL;
+  final String userimageURL;
 
   ChatMessage({
     required this.id,
@@ -13,6 +13,6 @@ class ChatMessage {
     required this.createdAt,
     required this.userId,
     required this.userName,
-    required this.userImageURL,
+    required this.userimageURL,
   });
 }

@@ -5,6 +5,7 @@ import 'package:awchat/core/services/auth/auth_service.dart';
 import 'package:awchat/core/models/chat_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthFirebaseService implements AuthService {
@@ -36,21 +37,27 @@ class AuthFirebaseService implements AuthService {
   @override
   Future<void> signup(
       String name, String email, String password, File? image) async {
-    final auth = FirebaseAuth.instance;
+    final signup = await Firebase.initializeApp(
+      name: 'userSignup',
+      options: Firebase.app().options,
+    );
+
+    final auth = FirebaseAuth.instanceFor(app: signup);
     UserCredential credential = await auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
-    if (credential.user == null) return;
-    // Upload Foto USer
-    final imageName = '${credential.user!.uid}.jpg';
-    final imageUrl = await _upLoadUserImage(image, imageName);
+    if (credential.user != null) {
+      // Upload Foto USer
+      final imageName = '${credential.user!.uid}.jpg';
+      final imageURL = await _upLoadUserImage(image, imageName);
 
-    //2 atualizar atributos usuário.
-    await credential.user?.updateDisplayName(name);
-    await credential.user?.updatePhotoURL(imageUrl);
+      //2 atualizar atributos usuário.
+      await credential.user?.updateDisplayName(name);
+      await credential.user?.updatePhotoURL(imageURL);
 
-    // Salvar banco de dados.
-    await _saveChatUser(_toChatUser(credential.user!, imageUrl));
+      // Salvar banco de dados.
+      await _saveChatUser(_toChatUser(credential.user!, imageURL));
+    }
   }
 
   Future<void> _saveChatUser(ChatUser user) async {
@@ -60,7 +67,7 @@ class AuthFirebaseService implements AuthService {
     return docRef.set({
       'name': user.name,
       'email': user.email,
-      'imageUrl': user.imageUrl,
+      'imageURL': user.imageURL,
     });
   }
 
@@ -83,11 +90,11 @@ class AuthFirebaseService implements AuthService {
     return await imageRef.getDownloadURL();
   }
 
-  static ChatUser _toChatUser(User user, [String? imageUrl]) {
+  static ChatUser _toChatUser(User user, [String? imageURL]) {
     return ChatUser(
         id: user.uid,
         name: user.displayName ?? user.email!.split('@')[0],
         email: user.email!,
-        imageUrl: imageUrl ?? user.photoURL ?? '/assets/images/avatar.png');
+        imageURL: imageURL ?? user.photoURL ?? '/assets/images/avatar.png');
   }
 }
