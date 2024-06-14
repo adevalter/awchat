@@ -13,6 +13,7 @@ class AuthFirebaseService implements AuthService {
   static MultiStreamController<ChatUser?>? _controller;
   static final _userStream = Stream<ChatUser?>.multi((controller) async {
     final authchanges = FirebaseAuth.instance.authStateChanges();
+
     await for (final user in authchanges) {
       _currentUser = user == null ? null : _toChatUser(user);
       controller.add(_currentUser);
@@ -56,7 +57,8 @@ class AuthFirebaseService implements AuthService {
       await credential.user?.updatePhotoURL(imageURL);
 
       // Salvar banco de dados.
-      await _saveChatUser(_toChatUser(credential.user!, imageURL));
+      _currentUser = _toChatUser(credential.user!, name, imageURL);
+      await _saveChatUser(_currentUser!);
     }
   }
 
@@ -90,10 +92,10 @@ class AuthFirebaseService implements AuthService {
     return await imageRef.getDownloadURL();
   }
 
-  static ChatUser _toChatUser(User user, [String? imageURL]) {
+  static ChatUser _toChatUser(User user, [String? name, String? imageURL]) {
     return ChatUser(
         id: user.uid,
-        name: user.displayName ?? user.email!.split('@')[0],
+        name: name ?? user.displayName ?? user.email!.split('@')[0],
         email: user.email!,
         imageURL: imageURL ?? user.photoURL ?? '/assets/images/avatar.png');
   }
