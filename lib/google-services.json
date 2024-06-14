@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "970139717820",
+    "project_id": "aowebchat",
+    "storage_bucket": "aowebchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970139717820:android:29b03a9763e276e9dd80b9",
+        "android_client_info": {
+          "package_name": "br.com.adeweb.awchat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4WQiYfL6Xwor7KzdoCfZpunLxETWoZLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
