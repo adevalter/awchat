@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"aowebchat","appId":"1:970139717820:android:29b03a9763e276e9dd80b9","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"aowebchat","configurations":{"android":"1:970139717820:android:29b03a9763e276e9dd80b9","web":"1:970139717820:web:1a6052483123f6cadd80b9"}}}}}}

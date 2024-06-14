@@ -1,11 +1,15 @@
 import 'package:awchat/core/models/chat_notification.dart';
 import 'package:flutter/material.dart';
 
-class PushNotificationService with ChangeNotifier {
+class ChatNotificationService with ChangeNotifier {
   List<ChatNotification> _items = [];
 
   List<ChatNotification> get items {
     return [..._items];
+  }
+
+  int get itemsCount {
+    return _items.length;
   }
 
   void add(ChatNotification notification) {
@@ -15,5 +19,6 @@ class PushNotificationService with ChangeNotifier {
 
   void remove(int i) {
     _items.removeAt(i);
+    notifyListeners();
   }
 }
